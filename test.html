@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Check - Therapy @MEDPACE</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #121212;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 10;
+        }
+        
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #4fc3f7; /* Blue */
+            letter-spacing: 0.5px;
+        }
+        
+        .small-button {
+            padding: 8px 15px;
+            background-color: #2e7d32; /* Green */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .small-button:hover {
+            background-color: #388e3c;
+            transform: translateY(-2px);
+        }
+        
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: #1A5F7A; /* Teal/medical blue - solid color */
+            position: relative;
+            z-index: 5;
+        }
+        
+        .uc-health-logo {
+            margin-bottom: 40px;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .uc-health-logo svg {
+            max-width: 300px;
+            height: auto;
+            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
+        }
+        
+        .patients-table-container {
+            width: 90%;
+            max-width: 1200px;
+            background-color: rgba(12, 35, 46, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+        }
+        
+        .patients-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .patients-table th {
+            background-color: #2196f3;
+            color: white;
+            text-align: left;
+            padding: 12px;
+            font-weight: bold;
+        }
+        
+        .patients-table td {
+            border: 1px solid #333;
+            padding: 10px;
+            color: #e0e0e0;
+        }
+        
+        .patients-table tr:nth-child(even) {
+            background-color: rgba(40, 40, 40, 0.5);
+        }
+        
+        .update-btn {
+            padding: 6px 12px;
+            background-color: #2e7d32;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .update-btn:hover {
+            background-color: #388e3c;
+        }
+        
+        .table-title {
+            color: #4fc3f7;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+        
+        /* Empty table rows */
+        .empty-row td {
+            height: 40px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">Health Check - Therapy @MEDPACE</div>
+        <button class="small-button">Get Started</button>
+    </header>
+    
+    <main class="content">
+        <div class="uc-health-logo">
+            <!-- UC Health Logo in SVG format -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300">
+                <!-- UC Health Logo -->
+                <g fill="#0066CC">
+                    <!-- UC Letters -->
+                    <path d="M80,70 C80,50 90,40 110,40 L150,40 C170,40 180,50 180,70 L180,140 C180,160 170,170 150,170 L110,170 C90,170 80,160 80,140 L80,70 Z M120,60 L120,150 L140,150 C145,150 150,145 150,140 L150,70 C150,65 145,60 140,60 L120,60 Z" />
+                    <path d="M240,40 L260,40 L300,170 L260,170 L252,140 L225,140 L218,170 L180,170 L220,40 L240,40 Z M230,60 L230,60 L230,120 L248,120 L240,90 L236,75 L232,90 L230,60 Z" />
+                    
+                    <!-- Health Text -->
+                    <path d="M320,40 L350,40 L350,95 L380,95 L380,40 L410,40 L410,170 L380,170 L380,120 L350,120 L350,170 L320,170 L320,40 Z" />
+                    <path d="M420,40 L490,40 L490,65 L450,65 L450,90 L480,90 L480,115 L450,115 L450,145 L490,145 L490,170 L420,170 L420,40 Z" />
+                    <path d="M500,40 L530,40 L530,145 L570,145 L570,170 L500,170 L500,40 Z" />
+                    <path d="M580,40 L610,40 L610,95 L640,95 L640,40 L670,40 L670,170 L640,170 L640,120 L610,120 L610,170 L580,170 L580,40 Z" />
+                </g>
+                <!-- Cross symbol -->
+                <path d="M700,60 L720,60 L720,80 L740,80 L740,100 L720,100 L720,120 L700,120 L700,100 L680,100 L680,80 L700,80 Z" fill="#2e7d32" />
+            </svg>
+        </div>
+        
+        <div class="patients-table-container">
+            <div class="table-title">Patient Records</div>
+            <table class="patients-table">
+                <thead>
+                    <tr>
+                        <th>NAME</th>
+                        <th>D.O.B</th>
+                        <th>GENDER</th>
+                        <th>EMAIL</th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Empty rows with update buttons -->
+                    <tr class="empty-row">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><button class="update-btn">Update</button></td>
+                    </tr>
+                    <tr class="empty-row">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><button class="update-btn">Update</button></td>
+                    </tr>
+                    <tr class="empty-row">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><button class="update-btn">Update</button></td>
+                    </tr>
+                    <tr class="empty-row">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><button class="update-btn">Update</button></td>
+                    </tr>
+                    <tr class="empty-row">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><button class="update-btn">Update</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+    
+    <script>
+        // Basic button interaction
+        document.querySelectorAll('.small-button').forEach(button => {
+            button.addEventListener('click', () => {
+                alert('Welcome to Health Check - Therapy @MEDPACE!');
+            });
+        });
+        
+        // Update button interaction (placeholder for future link)
+        document.querySelectorAll('.update-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                alert('This button will link to patient details page.');
+                // Future implementation: window.location.href = 'patient-details.html';
+            });
+        });
+    </script>
+</body>
+</html>
