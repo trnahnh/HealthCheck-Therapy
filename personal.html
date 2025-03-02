@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile Setup</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+        
+        .form-container {
+            background-color: #f9f9f9;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        input[type="number"] {
+            width: calc(100% - 22px);
+        }
+        
+        .unit {
+            display: inline-block;
+            margin-left: 5px;
+            color: #666;
+        }
+        
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 10.0s;
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+        }
+        
+        .success-message {
+            display: none;
+            background-color: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+        
+        .error-message {
+            display: none;
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+        
+        .required::after {
+            content: "*";
+            color: #e74c3c;
+            margin-left: 3px;
+        }
+        
+        .optional {
+            color: #7f8c8d;
+            font-size: 14px;
+            font-weight: normal;
+        }
+    </style>
+</head>
+<body>
+    <h1>Complete Your Profile</h1>
+    
+    <div class="form-container">
+        <form id="userProfileForm">
+            <div class="form-group">
+                <label for="name" class="required">Full Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email" class="required">Email Address</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="height">Height <span class="optional">(optional)</span></label>
+                <input type="number" id="height" name="height" min="50" max="250" step="0.1">
+                <span class="unit">cm</span>
+            </div>
+            
+            <div class="form-group">
+                <label for="weight">Weight <span class="optional">(optional)</span></label>
+                <input type="number" id="weight" name="weight" min="20" max="500" step="0.1">
+                <span class="unit">kg</span>
+            </div>
+            
+            <div class="form-group">
+                <label for="skinTone">Skin Tone <span class="optional">(optional)</span></label>
+                <select id="skinTone" name="skinTone">
+                    <option value="">Select an option</option>
+                    <option value="very-fair">Very Fair</option>
+                    <option value="fair">Fair</option>
+                    <option value="medium">Medium</option>
+                    <option value="olive">Olive</option>
+                    <option value="brown">Brown</option>
+                    <option value="dark-brown">Dark Brown</option>
+                    <option value="very-dark">Very Dark</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="dateOfBirth" class="required">Date of Birth</label>
+                <input type="date" id="dateOfBirth" name="dateOfBirth" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="gender">Gender <span class="optional">(optional)</span></label>
+                <select id="gender" name="gender">
+                    <option value="">Prefer not to say</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="non-binary">Non-binary</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            
+            <button type="submit">Save Profile</button>
+        </form>
+        
+        <div id="successMessage" class="success-message">
+            Your profile has been successfully saved!
+        </div>
+        
+        <div id="errorMessage" class="error-message">
+            There was an error saving your profile. Please try again.
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('userProfileForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Collect form data
+            const formData = new FormData(this);
+            const userData = {};
+            
+            // Convert FormData to a plain object
+            for (const [key, value] of formData.entries()) {
+                userData[key] = value;
+            }
+            
+            // Log data (for demonstration purposes)
+            console.log('User data to be sent:', userData);
+            
+            // Simulate sending data to server
+            fetch('https://your-server-endpoint.com/api/user-profile', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userData)
+            })
+            .then(response => {
+                // For demo purposes, we'll just simulate a successful response
+                // In a real application, you would check if response.ok is true
+                
+                // Show success message
+                document.getElementById('successMessage').style.display = 'block';
+                
+                // Reset form after successful submission
+                document.getElementById('userProfileForm').reset();
+                
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    document.getElementById('successMessage').style.display = 'none';
+                }, 5000);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                
+                // Show error message
+                document.getElementById('errorMessage').style.display = 'block';
+                
+                // Hide error message after 5 seconds
+                setTimeout(() => {
+                    document.getElementById('errorMessage').style.display = 'none';
+                }, 5000);
+            });
+        });
+    </script>
+</body>
+</html>
